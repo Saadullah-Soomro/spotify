@@ -1,3 +1,5 @@
+import { useIsMobile } from "@/hooks/use-mobile";
+
 interface ArtistCardProps {
   name: string;
   image: string;
@@ -5,10 +7,12 @@ interface ArtistCardProps {
 }
 
 const ArtistCard = ({ name, image, type = "Artist" }: ArtistCardProps) => {
+  const isMobile = useIsMobile();
+  
   return (
-    <div className="group cursor-pointer text-center min-w-[140px]">
+    <div className={`group cursor-pointer text-center ${isMobile ? 'min-w-[120px] w-[120px]' : 'min-w-[140px]'}`}>
       <div className="relative mb-3">
-        <div className="w-[140px] h-[140px] rounded-full overflow-hidden shadow-lg mx-auto">
+        <div className={`${isMobile ? 'w-[120px] h-[120px]' : 'w-[140px] h-[140px]'} rounded-full overflow-hidden shadow-lg mx-auto`}>
           <img
             src={image}
             alt={name}

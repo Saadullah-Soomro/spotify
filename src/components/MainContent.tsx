@@ -11,6 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const MainContent = () => {
   const popularRadio = [
@@ -264,27 +265,34 @@ const MainContent = () => {
 
   
 
+  const isMobile = useIsMobile();
+
   return (
-    <main className="flex-1 overflow-y-auto p-6 pb-24">
+    <main className={`flex-1 overflow-y-auto ${isMobile ? 'p-4 pb-24' : 'p-6 pb-24'}`}>
       {/* Greeting */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Good afternoon</h1>
+      <div className={`${isMobile ? 'mb-6' : 'mb-8'}`}>
+        <h1 className={`${isMobile ? 'text-2xl' : 'text-3xl'} font-bold mb-2`}>Good afternoon</h1>
       </div>
 
-
-
       {/* Popular Albums and Singles */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Popular albums and singles</h2>
+      <section className={`${isMobile ? 'mb-6' : 'mb-8'}`}>
+        <div className={`flex items-center justify-between ${isMobile ? 'mb-4' : 'mb-6'}`}>
+          <h2 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold`}>Popular albums and singles</h2>
           <button className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
             Show all
           </button>
         </div>
-        <Carousel className="w-full">
-          <CarouselContent className="-ml-4">
+        <Carousel 
+          className="w-full"
+          opts={{
+            align: "start",
+            dragFree: true,
+            containScroll: "trimSnaps"
+          }}
+        >
+          <CarouselContent className={`${isMobile ? '-ml-2' : '-ml-4'}`}>
             {popularAlbums.map((album, index) => (
-              <CarouselItem key={index} className="basis-auto pl-4">
+              <CarouselItem key={index} className={`basis-auto ${isMobile ? 'pl-2' : 'pl-4'}`}>
                 <AlbumCard
                   title={album.title}
                   artist={album.artist}
@@ -293,23 +301,30 @@ const MainContent = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-2" />
-          <CarouselNext className="right-2" />
+          {!isMobile && <CarouselPrevious className="left-2" />}
+          {!isMobile && <CarouselNext className="right-2" />}
         </Carousel>
       </section>
 
       {/* Trending Songs */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Trending songs</h2>
+      <section className={`${isMobile ? 'mb-6' : 'mb-8'}`}>
+        <div className={`flex items-center justify-between ${isMobile ? 'mb-4' : 'mb-6'}`}>
+          <h2 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold`}>Trending songs</h2>
           <button className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
             Show all
           </button>
         </div>
-        <Carousel className="w-full">
-          <CarouselContent className="-ml-4">
+        <Carousel 
+          className="w-full"
+          opts={{
+            align: "start",
+            dragFree: true,
+            containScroll: "trimSnaps"
+          }}
+        >
+          <CarouselContent className={`${isMobile ? '-ml-2' : '-ml-4'}`}>
             {trendingSongs.map((song, index) => (
-              <CarouselItem key={index} className="basis-auto pl-4">
+              <CarouselItem key={index} className={`basis-auto ${isMobile ? 'pl-2' : 'pl-4'}`}>
                 <SongCard
                   title={song.title}
                   artist={song.artist}
@@ -318,23 +333,30 @@ const MainContent = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-2" />
-          <CarouselNext className="right-2" />
+          {!isMobile && <CarouselPrevious className="left-2" />}
+          {!isMobile && <CarouselNext className="right-2" />}
         </Carousel>
       </section>
 
       {/* Popular Radio */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Popular radio</h2>
+      <section className={`${isMobile ? 'mb-6' : 'mb-8'}`}>
+        <div className={`flex items-center justify-between ${isMobile ? 'mb-4' : 'mb-6'}`}>
+          <h2 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold`}>Popular radio</h2>
           <button className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
             Show all
           </button>
         </div>
-        <Carousel className="w-full">
-          <CarouselContent className="-ml-4">
+        <Carousel 
+          className="w-full"
+          opts={{
+            align: "start",
+            dragFree: true,
+            containScroll: "trimSnaps"
+          }}
+        >
+          <CarouselContent className={`${isMobile ? '-ml-2' : '-ml-4'}`}>
             {popularRadio.map((radio, index) => (
-              <CarouselItem key={index} className="basis-auto pl-4">
+              <CarouselItem key={index} className={`basis-auto ${isMobile ? 'pl-2' : 'pl-4'}`}>
                 <RadioCard
                   title={radio.title}
                   description={radio.description}
@@ -344,23 +366,30 @@ const MainContent = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-2" />
-          <CarouselNext className="right-2" />
+          {!isMobile && <CarouselPrevious className="left-2" />}
+          {!isMobile && <CarouselNext className="right-2" />}
         </Carousel>
       </section>
 
       {/* Featured Charts */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Featured Charts</h2>
+      <section className={`${isMobile ? 'mb-6' : 'mb-8'}`}>
+        <div className={`flex items-center justify-between ${isMobile ? 'mb-4' : 'mb-6'}`}>
+          <h2 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold`}>Featured Charts</h2>
           <button className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
             Show all
           </button>
         </div>
-        <Carousel className="w-full">
-          <CarouselContent className="-ml-4">
+        <Carousel 
+          className="w-full"
+          opts={{
+            align: "start",
+            dragFree: true,
+            containScroll: "trimSnaps"
+          }}
+        >
+          <CarouselContent className={`${isMobile ? '-ml-2' : '-ml-4'}`}>
             {featuredCharts.map((chart, index) => (
-              <CarouselItem key={index} className="basis-auto pl-4">
+              <CarouselItem key={index} className={`basis-auto ${isMobile ? 'pl-2' : 'pl-4'}`}>
                 <ChartCard
                   title={chart.title}
                   subtitle={chart.subtitle}
@@ -369,23 +398,30 @@ const MainContent = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-2" />
-          <CarouselNext className="right-2" />
+          {!isMobile && <CarouselPrevious className="left-2" />}
+          {!isMobile && <CarouselNext className="right-2" />}
         </Carousel>
       </section>
 
       {/* Popular Artists */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Popular artists</h2>
+      <section className={`${isMobile ? 'mb-6' : 'mb-8'}`}>
+        <div className={`flex items-center justify-between ${isMobile ? 'mb-4' : 'mb-6'}`}>
+          <h2 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold`}>Popular artists</h2>
           <button className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
             Show all
           </button>
         </div>
-        <Carousel className="w-full">
-          <CarouselContent className="-ml-4">
+        <Carousel 
+          className="w-full"
+          opts={{
+            align: "start",
+            dragFree: true,
+            containScroll: "trimSnaps"
+          }}
+        >
+          <CarouselContent className={`${isMobile ? '-ml-2' : '-ml-4'}`}>
             {popularArtists.map((artist, index) => (
-              <CarouselItem key={index} className="basis-auto pl-4">
+              <CarouselItem key={index} className={`basis-auto ${isMobile ? 'pl-2' : 'pl-4'}`}>
                 <ArtistCard
                   name={artist.name}
                   image={artist.image}
@@ -393,8 +429,8 @@ const MainContent = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-2" />
-          <CarouselNext className="right-2" />
+          {!isMobile && <CarouselPrevious className="left-2" />}
+          {!isMobile && <CarouselNext className="right-2" />}
         </Carousel>
       </section>
     </main>
